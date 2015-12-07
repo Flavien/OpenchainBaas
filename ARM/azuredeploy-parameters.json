@@ -5,23 +5,23 @@
         "newStorageAccountName": {
             "value": "unqiueStorageAccount"
         },
+        "location": {
+            "value": "East US"
+        },
         "vmSize": {
             "value": "Standard_A1"
         },
-        "vmName": {
-            "value": "openchain"
-        },
-        "location": {
-            "value": "West US"
-        },
+        "openchainAdminKey": {
+            "value": "XpGxyLkMdXd9EsiR2XHvqgnHi4QwBZk9mH"
+        }
         "adminUsername": {
-            "value": "userName"
+            "value": "username"
         },
         "adminPassword": {
             "value": "password"
         },
         "dnsNameForPublicIP": {
-            "value": "uniqueDNS"
+            "value": "uniquedns"
         }
    }
 }

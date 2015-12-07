@@ -14,12 +14,49 @@
         "description": "The location where the Virtual Machine will be deployed."
       },
       "allowedValues": [
-        "West US",
         "East US",
+        "South Central US",
+        "West US",
+        "Central US",
+        "North Central US",
+        "East US 2",
+        "North Europe",
+        "West Europe",
         "Southeast Asia",
         "East Asia",
-        "West Europe"
+        "Japan West",
+        "Japan East",
+        "Brazil South"
       ]
+    },
+    "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_A1",
+      "allowedValues": [
+        "Standard_A0",
+        "Standard_A1",
+        "Standard_A2",
+        "Standard_A3",
+        "Standard_A4",
+        "Standard_A5",
+        "Standard_A6",
+        "Standard_A7",
+        "Standard_A8",
+        "Standard_A9",
+        "Standard_A10",
+        "Standard_A11",
+        "Standard_D1",
+        "Standard_D2",
+        "Standard_D3",
+        "Standard_D4",
+        "Standard_D11",
+        "Standard_D12",
+        "Standard_D13",
+        "Standard_D14"
+      ],
+      "metadata": {
+        "description": "The size of the virtual machines used when provisioning cluster nodes"
+      }
     },
     "openchainAdminKey": {
       "type": "securestring",
@@ -50,20 +87,19 @@
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
     "ubuntuOSVersion": "14.04",
-    "OSDiskName": "osdiskfordockersimple",
-    "nsgName": "myNSG",
-    "nicName": "myVMNic",
+    "OSDiskName": "openchain-osdisk",
+    "nsgName": "openchainNSG",
+    "nicName": "openchainVMNic",
     "extensionName": "DockerExtension",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
     "subnetPrefix": "10.0.0.0/24",
     "storageAccountType": "Standard_LRS",
-    "publicIPAddressName": "myPublicIP",
+    "publicIPAddressName": "Openchain-PublicIP",
     "publicIPAddressType": "Dynamic",
     "vmStorageAccountContainerName": "vhds",
-    "vmName": "MyDockerVM",
-    "vmSize": "Standard_D1",
-    "virtualNetworkName": "MyVNET",
+    "vmName": "openchain",
+    "virtualNetworkName": "Openchain-VNet",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "nsgID": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('nsgName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
@@ -192,7 +228,7 @@
       ],
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[variables('vmSize')]"
+          "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
           "computerName": "[variables('vmName')]",
