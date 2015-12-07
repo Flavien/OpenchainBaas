@@ -90,14 +90,14 @@
     "imageOffer": "UbuntuServer",
     "ubuntuOSVersion": "14.04",
     "OSDiskName": "openchain-osdisk",
-    "nsgName": "openchainNSG",
-    "nicName": "openchainVMNic",
+    "nsgName": "openchain-nsg",
+    "nicName": "openchain-vmnic",
     "extensionName": "DockerExtension",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
     "subnetPrefix": "10.0.0.0/24",
     "storageAccountType": "Standard_LRS",
-    "publicIPAddressName": "Openchain-PublicIP",
+    "publicIPAddressName": "openchainPublicIP",
     "publicIPAddressType": "Dynamic",
     "vmStorageAccountContainerName": "vhds",
     "vmName": "openchain",
@@ -294,7 +294,7 @@
         "typeHandlerVersion": "1.2",
         "settings": {
           "fileUris": [
-            "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/minecraft-on-ubuntu/install_minecraft.sh"
+            "https://raw.githubusercontent.com/Flavien/OpenchainBaas/master/ARM/install_openchain.sh"
           ],
           "commandToExecute": "[concat('bash install_openchain.sh ', 'http://', parameters('dnsNameForPublicIP'), '/ ', parameters('openchainAdminKey'))]"
         }
