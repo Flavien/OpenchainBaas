@@ -10,6 +10,7 @@
     },
     "location": {
       "type": "string",
+      "defaultValue": "East US",
       "metadata": {
         "description": "The location where the Virtual Machine will be deployed."
       },
@@ -61,11 +62,12 @@
     "openchainAdminKey": {
       "type": "securestring",
       "metadata": {
-        "description": ""
+        "description": "The address of the administrator of the Openchain instance."
       }
     },
     "adminUsername": {
       "type": "string",
+      "defaultValue": "azureuser",
       "metadata": {
         "description": "Username for the Virtual Machine."
       }
@@ -298,5 +300,11 @@
         }
       }
     }
-  ]
+  ],
+  "outputs": {
+    "endpointURL": {
+      "value": "[concat('Endpoint URL of the Openchain instance: ', 'http://', parameters('dnsNameForPublicIP'), '/']",
+      "type": "string"
+    }
+  }
 }
