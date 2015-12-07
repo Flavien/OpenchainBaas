@@ -2,6 +2,9 @@
 # $1 = Root URL
 # $2 = Admin address
 
+apt-get update
+apt-get install -y git
+
 cd /opt
 git clone https://github.com/openchain/docker.git openchain
 cd openchain
