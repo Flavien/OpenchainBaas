@@ -38,7 +38,7 @@
       }
     },
     "openchainAdminKey": {
-      "type": "securestring",
+      "type": "string",
       "metadata": {
         "description": "The address of the administrator of the Openchain instance."
       }
