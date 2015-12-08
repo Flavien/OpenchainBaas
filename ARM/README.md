@@ -1,37 +1,38 @@
-#CoinPrism BaaS Deployment and Config Templates
-Place ARP Azure Marketplace deployment scripts within a single folder (can contain sub folders) examples like
+# Deploying Openchain on Microsoft Azure
 
-1.  CoinPrism Developer Windows - Core Single Node (loopback blockchain) - Windows Server +  CoinPrism Node +  CoinPrism SDK
-2. 	CoinPrism Multi Node Private Blockchain Geo-dispersed nodes - Ubuntu 14.04 + Windows Server + CoinPrism Nodes + SDK
+Openchain is an open source distributed ledger technology. It is suited for organizations wishing to issue and manage digital assets in a robust, secure and scalable way.
 
+Please follow these steps to deploy Openchain on Microsoft Azure.
 
-EXAMPLES
+## Generate an admin seed
 
-Install Minecraft server on an Ubuntu Virtual Machine using the Linux Custom Script Extension
+The admin seed will be used to authenticate as an administrator on the Openchain instance. The administrator is a superuser and has the ability to perform several administrative operations.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fminecraft-on-ubuntu%2Fazuredeploy.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
+To generate an admin seed, go to https://wallet.openchain.org. If this is the first time you access the wallet, you will be prompted for an endpoint URL, click the link to use the test instance.
 
-This template deploys and sets up a customized Minecraft server on an Ubuntu Virtual Machine, with you as the operator. It also deploys a Storage Account, Virtual Network, Public IP addresses and a Network Interface.
+You will then be directed to the "Sign in" page. Click on "Create a new wallet". A seed will be showed, write down this seed, and store it in a safe place. Press back, and type the seed in the "Passphrase" box.
 
-You can set common Minecraft server properties as parameters at deployment time. Once the deployment is successful you can connect to the DNS address of the VM with a Minecraft launcher. 
+After a few seconds, you will see the home screen. On the right, an address is displayed. It will look like ``XaykLnzmAPVMcGYQ51BvpJRJ9KQ34ssoPL``. Copy this address, it represents the admin public key.
 
-The following Minecraft server configuration parameters can be set at deployment time: Minecraft user name, difficulty, level-name, gamemode, white-list, enable-command-block, spawn-monsters, generate-structures, level-seed.
+## Start the deployment
 
-Ubuntu Desktop VM in ARM
+In order to deploy Openchain, you will need the following pieces of information:
 
-This is an Azure template to create an Ubuntu Desktop VM.  This is great as a jumpbox behind a NAT.
+* ``newStorageAccountName``: A unique name for the Storage Account where the Virtual Machine's disks will be placed.
+* ``vmSize``: The size of the virtual machines used when provisioning the node.
+* ``openchainAdminKey``: The admin public key obtained in the previous section of this document.
+* ``adminUsername``: The username used to log in onto the Virtual Machine.
+* ``adminPassword``: The password used to log in onto the Virtual Machine.
+* ``dnsNameForPublicIP``: A unique name used for the public IP used to access the Openchain instance.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fubuntu-desktop%2Fazuredeploy.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
+Once the deployment has completed, you will receive the ``endpointURL`` that can be used to connect to the Openchain instance.
 
-#Resources
+## Connect to the Openchain instance
 
-Azure Quickstart Templates Github Repo:  https://github.com/Azure/azure-quickstart-templates
+Go to [http://nossl.wallet.openchain.org/](http://nossl.wallet.openchain.org/). Enter the admin seed when prompted.
 
-Documentation.  https://github.com/brunoterkaly/alarm
+If you are connecting to this wallet endpoint for the first time, you will be prompted for the endpoint URL. Use the ``endpointURL`` obtained when the deployment completed. If you are not prompted, after authenticating with the admin seed, go to "Account" on the top right, and click "Add server...", then enter the endpoint URL obtained when the deployment completed.
 
-Marketplace example that has the deploy to Azure button as well which is useful: https://github.com/brunoterkaly/alarm/tree/master/marketplace-example-byol
+## Configure the ledger information
 
+Go to the Advanced tab and click Edit Ledger Info on the left. The screen will show you a form that will let you edit the ledger name and other fields stored in the [info record](https://docs.openchain.org/en/latest/ledger-rules/general.html#ledger-info-record).
