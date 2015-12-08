@@ -5,9 +5,6 @@
         "newStorageAccountName": {
             "value": "uniqueStorageAccount"
         },
-        "location": {
-            "value": "East US"
-        },
         "vmSize": {
             "value": "Standard_A0"
         },
