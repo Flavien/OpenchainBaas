@@ -283,7 +283,11 @@
   ],
   "outputs": {
     "endpointURL": {
-      "value": "[concat('Endpoint URL of the Openchain instance: ', 'http://', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))).dnsSettings.fqdn, '/')]",
+      "value": "[concat('http://', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))).dnsSettings.fqdn, '/')]",
+      "type": "string"
+    },
+    "instructions": {
+      "value": "Connect to this endpoint using the wallet hosted at http://nossl.wallet.openchain.org/.",
       "type": "string"
     }
   }
