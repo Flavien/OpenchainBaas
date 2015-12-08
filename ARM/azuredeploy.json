@@ -34,7 +34,7 @@
         "Standard_D14"
       ],
       "metadata": {
-        "description": "The size of the virtual machines used when provisioning cluster nodes"
+        "description": "The size of the virtual machines used when provisioning the node."
       }
     },
     "openchainAdminKey": {
@@ -59,7 +59,7 @@
     "dnsNameForPublicIP": {
       "type": "string",
       "metadata": {
-        "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
+        "description": "Unique DNS Name for the Public IP used to access the Openchain instance."
       }
     }
   },
