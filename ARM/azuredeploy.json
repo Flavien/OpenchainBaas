@@ -61,6 +61,17 @@
       "metadata": {
         "description": "Unique DNS Name for the Public IP used to access the Openchain instance."
       }
+    },
+    "openPermissions": {
+      "type": "string",
+      "defaultValue": "true",
+      "allowedValues": [
+        "true",
+        "false"
+      ],
+      "metadata": {
+        "description": "If True, anyone can join the ledger after generating a key pair. If False, users must be granted permission to transact on the ledger (except for the admin)."
+      }
     }
   },
   "variables": {
@@ -276,7 +287,7 @@
           "fileUris": [
             "https://raw.githubusercontent.com/Flavien/OpenchainBaas/master/ARM/install_openchain.sh"
           ],
-          "commandToExecute": "[concat('bash install_openchain.sh ', 'http://', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))).dnsSettings.fqdn, '/ ', parameters('openchainAdminKey'))]"
+          "commandToExecute": "[concat('bash install_openchain.sh ', 'http://', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))).dnsSettings.fqdn, '/ ', parameters('openchainAdminKey'), ' ', parameters('openPermissions'))]"
         }
       }
     }
