@@ -68,7 +68,7 @@
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
     "ubuntuOSVersion": "14.04.2-LTS",
-    "OSDiskName": "openchain-osdisk",
+    "osDiskName": "openchain-osdisk",
     "nsgName": "SecurityGroup",
     "nicName": "NIC",
     "dockerExtensionName": "Docker",
@@ -82,9 +82,9 @@
     "vmStorageAccountContainerName": "vhds",
     "vmName": "openchain",
     "virtualNetworkName": "VirtualNetwork",
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
-    "nsgID": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('nsgName'))]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+    "nsgID": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/', variables('subnetName'))]"
   },
   "resources": [
     {
@@ -147,11 +147,11 @@
       "properties": {
         "ipConfigurations": [
           {
-            "name": "ipconfig1",
+            "name": "ipconfig",
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))]"
               },
               "subnet": {
                 "id": "[variables('subnetRef')]"
@@ -227,7 +227,7 @@
           "osDisk": {
             "name": "OS-Disk",
             "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+              "uri": "[concat('http://', parameters('newStorageAccountName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('osDiskName'), '.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -236,7 +236,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
             }
           ]
         }
@@ -266,7 +266,7 @@
       "apiVersion": "2015-05-01-preview",
       "location": "[variables('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), '/extensions/', variables('dockerExtensionName'))]"
       ],
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
@@ -276,14 +276,14 @@
           "fileUris": [
             "https://raw.githubusercontent.com/Flavien/OpenchainBaas/master/ARM/install_openchain.sh"
           ],
-          "commandToExecute": "[concat('bash install_openchain.sh ', 'http://', parameters('dnsNameForPublicIP'), '/ ', parameters('openchainAdminKey'))]"
+          "commandToExecute": "[concat('bash install_openchain.sh ', 'http://', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))).dnsSettings.fqdn, '/ ', parameters('openchainAdminKey'))]"
         }
       }
     }
   ],
   "outputs": {
     "endpointURL": {
-      "value": "[concat('Endpoint URL of the Openchain instance: ', 'http://', parameters('dnsNameForPublicIP'), '/')]",
+      "value": "[concat('Endpoint URL of the Openchain instance: ', 'http://', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))).dnsSettings.fqdn, '/')]",
       "type": "string"
     }
   }
