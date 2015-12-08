@@ -1,0 +1,7 @@
+{
+  "itemDisplayName": "Create a test Openchain validator node",
+  "description": "This template creates single-node Openchain validator node. The endpoint is exposed over HTTP so it is only recommended for testing and development purposes.",
+  "summary": "Create a test Openchain validator node.",
+  "githubUsername": "flavien",
+  "dateUpdated": "2015-12-08"
+}
